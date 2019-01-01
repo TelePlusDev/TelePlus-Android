@@ -1,0 +1,88 @@
+apply plugin: 'com.android.application'
+
+repositories {
+    mavenCentral()
+    google()
+    jcenter()
+}
+
+configurations {
+    compile.exclude module: 'support-v4'
+}
+
+dependencies {
+    compileOnly 'org.checkerframework:checker-qual:2.5.0'
+    compileOnly 'org.checkerframework:checker-compat-qual:2.5.0'
+    implementation 'com.google.firebase:firebase-core:16.0.6'
+    implementation 'com.google.firebase:firebase-messaging:17.3.4'
+    implementation 'com.google.firebase:firebase-config:16.1.2'
+    implementation 'com.google.android.gms:play-services-maps:16.0.0'
+    implementation 'com.google.android.gms:play-services-vision:17.0.2'
+    implementation 'com.google.android.gms:play-services-wallet:16.0.1'
+    implementation 'com.google.android.gms:play-services-wearable:16.0.1'
+    implementation 'com.android.support:support-core-ui:28.0.0-rc01'
+    implementation 'com.android.support:support-compat:28.0.0-rc01'
+    implementation 'com.android.support:support-core-utils:28.0.0-rc01'
+    implementation 'com.android.support:support-v13:28.0.0-rc01'
+    implementation 'com.android.support:palette-v7:28.0.0-rc01'
+    implementation 'com.android.support:exifinterface:28.0.0-rc01'
+    implementation 'net.hockeyapp.android:HockeySDK:5.1.0'
+    implementation 'com.googlecode.mp4parser:isoparser:1.0.6'
+    implementation 'com.stripe:stripe-android:2.0.2'
+}
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
+
+    flavorDimensions "minApi"
+
+    defaultConfig {
+        applicationId "in.teleplus"
+        minSdkVersion 17
+        targetSdkVersion 28
+        versionName "5.4.0"
+        versionCode 5400
+        multiDexEnabled true
+        vectorDrawables.generatedDensities = ['mdpi', 'hdpi', 'xhdpi', 'xxhdpi']
+        ndk {
+            abiFilters "arm64-v8a", "armeabi-v7a", "x86", "x86_64"
+        }
+    }
+
+    sourceSets.main {
+        jniLibs.srcDir 'libs'
+        jni.srcDirs = []
+    }
+
+    dexOptions {
+        jumboMode = true
+    }
+
+    lintOptions {
+        disable 'MissingTranslation'
+        disable 'ExtraTranslation'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+            jniDebuggable true
+        }
+
+        release {
+            debuggable false
+            jniDebuggable false
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+apply plugin: 'com.google.gms.google-services'
