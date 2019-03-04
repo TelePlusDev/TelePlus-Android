@@ -6,3 +6,5 @@ This repo contains the source code for [TelePlus for Android](https://play.googl
 ### Official Website
 
 https://teleplus.in
+
+https://teleplusofficial.github.io
